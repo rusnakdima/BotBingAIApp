@@ -1,0 +1,25 @@
+{
+  "name": "bot-bing-ai-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ./server.js",
+    "tailwind": "pnpx tailwindcss -i ./public/assets/css/input.css -o ./public/assets/css/output.css --watch"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bing-chat": "^0.2.3",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "ora": "^6.3.0",
+    "socket.io": "^4.6.1"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.3.1"
+  }
+}

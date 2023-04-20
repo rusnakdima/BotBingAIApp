@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Chat Page</title>
+  <link rel="stylesheet" href="./assets/css/output.css">
+</head>
+
+<body class="bg-white dark:bg-zinc-800 text-black dark:text-white flex flex-col">
+  <div class="flex flex-row">
+    <div class="bg-white dark:bg-zinc-800 hidden absolute z-10 w-3/4 md:w-1/3 lg:w-1/4 md:fixed h-[100vh] styleBorderSolid border-r p-2 md:flex flex-col" id="menu">
+      <div class="flex flex-row w-full border-b styleBorderSolid p-2 md:hidden">
+        <button id="hideMenu" class="mb-5 border-b solidBorderSolid">Закрыть</button>
+      </div>
+      <button class="styleBut mb-5" onclick="createNew()">New chat</button>
+      <output id="chats-list" class="overflow-auto"></output>
+    </div>
+    <div class="w-full md:w-2/3 md:ml-[33.333%] lg:ml-[25%] lg:w-3/4 h-[100vh] flex flex-col">
+      <div class="flex flex-row w-full border-b styleBorderSolid p-2 md:hidden">
+        <button id="showMenu">Меню</button>
+      </div>
+      <div id="chat-mess-window" class="flex flex-col justify-start h-[90vh] overflow-auto mb-5"></div>
+      <div class="flex flex-row bottom-2 w-full gap-x-2">
+        <textarea type="text" id="questionField"></textarea>
+        <button id="butSend">Send</button>
+      </div>
+    </div>
+  </div>
+
+  <span class="bg-gray-400 dark:bg-gray-700"></span>
+  <script src="/socket.io/socket.io.js"></script>
+  <script src="./assets/js/script.js"></script>
+</body>
+
+</html>

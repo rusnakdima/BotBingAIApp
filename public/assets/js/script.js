@@ -6,22 +6,41 @@ const chatMessWindow = document.getElementById('chat-mess-window');
 const showMenu = document.getElementById('showMenu');
 const hideMenu = document.getElementById('hideMenu');
 
+var show = true;
+
 showMenu.addEventListener('click', () => {
   document.getElementById('menu').style.display = 'flex';
+  show = true;
 });
 
 hideMenu.addEventListener('click', () => {
   document.getElementById('menu').style.display = 'none';
+  show = false;
 });
+
+if(document.querySelector("body").offsetWidth <= 768){
+  document.getElementById('menu').style.display = 'none';
+  show = false;
+}
+
+setInterval(()=>{
+  if(!show && document.querySelector("body").offsetWidth <= 768){
+    document.getElementById('menu').style.display = 'none';
+    show = false;
+  } else {
+    document.getElementById('menu').style.display = 'flex';
+    show = true;
+  }
+}, 500);
 
 var roomId = '';
 
 function reloadChatList(){
   // Загрузка данных из JSON-файла
-  chatsList.innerHTML = '';
   fetch('./assets/js/chat.json')
     .then(response => response.json())
     .then(data => {
+      chatsList.innerHTML = '';
       for (var i = 0; i < Object.keys(data).length; i++) {
         // console.log(Object.keys(data)[i])
         var div = document.createElement('div');
@@ -29,7 +48,7 @@ function reloadChatList(){
         div.addEventListener("click", (event) => {
           // console.log(event.target.attributes[0].value, roomId)
           roomId = event.target.attributes[0].value;
-          setColBack();
+          // setColBack();
           reloadMessChat();
           if(document.querySelector("body").offsetWidth <= 768){
             document.getElementById('menu').style.display = 'none';
@@ -52,11 +71,8 @@ function reloadChatList(){
         chatsList.append(div);
       }
     });
-
-    /* if(roomId != ''){
-      setColBack();
-    } */
 }
+
 function setColBack(){
   var divAll = document.querySelectorAll("#chats-list div");
   for (var i = 0; i < divAll.length; i++) {
@@ -66,16 +82,18 @@ function setColBack(){
 }
 
 function reloadMessChat(){
-  chatMessWindow.innerHTML = '';
   if(roomId != ''){
+    setColBack();
     fetch(`./assets/js/${roomId}.json`)
       .then(response => response.json())
       .then(dataMess => {
+        chatMessWindow.innerHTML = '';
         if(Object.keys(dataMess).length > 0){
           // console.log(roomId, dataMess["messages"])
           for (var j = 0; j < dataMess["messages"].length; j++){
             var div1 = document.createElement("div");
-            div1.innerHTML = "<div class='flex flex-row w-full gap-x-2'><span class='font-bold flex flex-col text-left w-1/6'>" + dataMess["messages"][j]?.author + "</span><pre class='flex flex-col w-5/6 whitespace-pre-wrap text-left pr-5'>" + dataMess["messages"][j]?.message + "</pre></div>";
+            div1.innerHTML = "<div class='flex flex-row w-full gap-x-5'><span class='font-bold flex flex-col text-right w-1/6'>" + dataMess["messages"][j]?.author + `
+            ` + "</span><pre class='flex flex-col w-5/6 whitespace-pre-wrap text-left pr-5'>" + dataMess["messages"][j]?.message + "</pre></div>";
             div1.setAttribute("class", "styleMess")
             chatMessWindow.append(div1);
             var hr = document.createElement("hr");
@@ -85,7 +103,6 @@ function reloadMessChat(){
           // console.log(linkReqAll);
           for(var i = 0; i < linkReqAll.length; i++) {
             linkReqAll[i].addEventListener("click", (event) => {
-              console.log(event.target.innerText)
               document.querySelector("#questionField").value = event.target.innerText;
               sendRequest();
             });
@@ -110,6 +127,8 @@ reloadChatList();
 function createNew(){
   chatMessWindow.innerHTML = '';
   roomId = '';
+  reloadChatList();
+  reloadMessChat();
 }
 
 document.addEventListener('keydown', (event) => {
@@ -138,11 +157,15 @@ function sendRequest(){
 
 socket.on("update", (data) => {
   // console.log(data)
+  chatMessWindow.innerHTML = '';
   roomId = data;
   reloadChatList();
-  reloadMessChat();
+  setTimeout(()=>{
+    reloadMessChat();
+  }, 500);
 })
 
 function delChat(id) {
+  roomId = '';
   socket.emit("delChat", id);
 }

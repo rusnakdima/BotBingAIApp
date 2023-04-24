@@ -31,5 +31,5 @@ input, textarea{
 }
 
 a{
-  @apply no-underline text-blue-500 hover:underline decoration-blue-500 decoration-solid decoration-2 underline-offset-4
+  @apply no-underline text-blue-700 dark:text-green-500 hover:underline decoration-blue-700 dark:decoration-green-500 decoration-solid decoration-2 underline-offset-4
 }

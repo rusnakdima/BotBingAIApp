@@ -1,11 +1,13 @@
 import { BingChat } from 'bing-chat'; 
 import { oraPromise } from 'ora';
+
+import fs from 'fs';
+import { config } from 'dotenv';
+
 import express from 'express';
 import http from 'http';
 import path from 'path';
 import { Server } from 'socket.io';
-import fs from 'fs';
-import { config } from 'dotenv';
 
 const app = express();
 const server = http.createServer(app);
@@ -94,6 +96,9 @@ io.on('connection', (socket) => {
       request["text"] = request["text"].replace(/<[^>]*>/g, function(match) {
         return '< ' + match.replace(/<|>/g, "") + ' >';
       });
+      // request["text"] = request["text"].replace(/\[\^[^\^\]]*\^\]/g, function(match) {
+      //   return '<sup>' + match.replace(/\[\^|\^\]/g, "") + '</sup>';
+      // });
     }
     console.log(request);
 

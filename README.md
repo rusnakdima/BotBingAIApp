@@ -31,3 +31,11 @@ Once you are in the application, you can start chatting with the neural network 
 ## Contributing
 
 If you would like to contribute to BotBingAIApp, please fork the repository and make any necessary changes. Once you have made your changes, submit a pull request and we will review your changes.
+
+## Authors
+
+- [Dmitriy303](https://github.com/rusnakdima)
+
+## Contact
+
+If you have any questions or comments about this project, please feel free to contact us at [contact email](rusnakdima03@gmail.com).

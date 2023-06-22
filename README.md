@@ -2,15 +2,47 @@
 
 BotBingAIApp is a web application that allows users to interact with a neural network powered by Microsoft's Bing. This application is similar to a chatbot, and users can make requests to the neural network by typing in their queries.
 
+## Screenshots
+
+![screen1](screen1.png)
+
 ## Installation
 
-To install BotBingAIApp, you will need to have Node.js installed on your machine. Once you have Node.js installed, you can use the pnpm package manager to install the application. Simply run the following command in your terminal:
+First you need to install all the dependencies to run this project. But first make sure you have Node js installed.
+To do this, open a command prompt or terminal and type the following commands:
+
+```bash
+node -v
+```
+```bash
+npm -v
+```
+
+If you are using the pnpm package manager, then run this command:
+
+```bash
+pnpm -v
+```
+
+After that, go to the folder with this project and run the following command:
+
+```bash
+npm install
+```
+Or
+```bash
+npm i
+```
+
+If you are using the pnpm package manager, then run this command:
 
 ```bash
 pnpm install
 ```
-
-This will install all of the necessary dependencies for the application.
+Or
+```bash
+pnpm i
+```
 
 To authenticate with the Bing API and make requests to the neural network, users must provide a valid cookie in the form of a `COOKIE=YOUR_COOKIE` string. To do this, create a `.env` file in the root directory of the project and add the `COOKIE` variable with your cookie value. This will allow the application to authenticate with the Bing API and make requests to the neural network.
 
@@ -18,13 +50,19 @@ Note that the `COOKIE` value should not be shared with anyone else, as it grants
 
 ## Usage
 
-To start the application, run the following command in your terminal:
+After installing the dependencies, use the following command to run, depending on the package manager you are using:
 
+```bash
+npm run start
+```
+Or
 ```bash
 pnpm start
 ```
 
-This will start the application on your local server. You can then access the application by navigating to `http://localhost:3000` in your web browser.
+After launching, copy and paste the following url into the address bar:
+
+[http://localhost:3000](http://localhost:3000)
 
 Once you are in the application, you can start chatting with the neural network by typing in your queries. All of your requests and chats will be saved to JSON files for later reference.
 
@@ -35,6 +73,10 @@ If you would like to contribute to BotBingAIApp, please fork the repository and 
 ## Authors
 
 - [Dmitriy303](https://github.com/rusnakdima)
+
+## License
+
+This project is licensed under the [License Name](LICENSE.MD).
 
 ## Contact
 
